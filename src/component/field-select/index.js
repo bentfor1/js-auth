@@ -21,11 +21,17 @@ class FieldSelect {
     const parent = target.parentElement.parentElement
     const list = target.parentElement
 
+    //==
+
     const active = list.querySelector('*[active]')
 
     if (active) active.toggleAttribute('active')
 
+    //==
+
     target.toggleAttribute('active')
+
+    //==
 
     const value = parent.querySelector('.field__value')
 
@@ -33,6 +39,8 @@ class FieldSelect {
       value.innerText = target.innerText
       value.classList.remove('field__value--placeholder')
     }
+
+    //==
 
     list.toggleAttribute('active')
   }
