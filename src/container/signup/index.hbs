@@ -1,49 +1,45 @@
-{{!
-Це код container файлу для index сторінки,
-в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
-}}
 <div class="page page--background">
-	<header>
-		{{>back-button}}
-	</header>
-	<form action="" class="page__section">
-		<h1 class="page__title">Реєстрація</h1>
+    <header>
+        {{>back-button}}
+    </header>
+    <form action="" class="page__section">
+        <h1 class="page__title">Реєстрація</h1>
 
-		<div class="form">
+        <div class="form">
 
-			<div class="form__item">
-				{{> field action="signupForm.change" name='email' placeholder='Ваш e-mail' label='Ел. адреса'}}
-				<span name="email" class="form__error">Помилка</span>
-			</div>
+            <div class="form__item">
+                {{> field action="signupForm.change" name='email' placeholder='Ваш e-mail' label='Ел. адреса'}}
+                <span name="email" class="form__error">Помилка</span>
+            </div>
 
-			<div class="form__item">
-				{{> field-password action="signupForm.change" name='password' placeholder='Введіть пароль'
-				label='Пароль'}}
-				<span name="password" class="form__error">Помилка</span>
-			</div>
 
-			<div class="form__item">
-				{{> field-select action="signupForm.change" name='role' placeholder='Оберіть роль' label='Роль'
-				list=data.role}}
-				<span name="role" class="form__error">Помилка</span>
-			</div>
+            <div class="form__item">
+                {{> field-select action="signupForm.change" name='role' placeholder='Оберіть роль' label='Роль'
+                list=data.role}}
+                <span name="role" class="form__error">Помилка</span>
+            </div>
 
-			<div class="form__item">
-				{{> field-checkbox action="signupForm.change" name='isComfirm' label='Ви
-				погоджуєтеся з правилами сервіса'}}
-				<span name="isComfirm" class="form__error">Помилка</span>
-			</div>
+            <div class="form__item">
+                {{> field-password action="signupForm.change" name='password' placeholder='Введіть пароль'
+                label='Пароль'}}
+                <span name="password" class="form__error">Помилка</span>
+            </div>
 
-		</div>
+            <div class="form__item">
+                {{> field-password action="signupForm.change" name='passwordAgain' placeholder='Введіть пароль'
+                label='Пароль ще раз'}}
+                <span name="passwordAgain" class="form__error">Помилка</span>
+            </div>
+            <div class="form__item">
+                {{> field-checkbox action="signupForm.change" name='isConfirm' label='Ви
+                погоджуєтеся з правилами сервіса'}}
+                <span name="isConfirm" class="form__error">Помилка</span>
+            </div>
 
-		<button onclick="signupForm.submit()" class="button" type="button">Зареєструватися</button>
-		<span class="alert alert--error">Увага, помилка</span>
+        </div>
 
-	</form>
+        <button onclick="signupForm.submit()" class="button button--disabled" type="button">Зареєструватися</button>
+        <span class="alert alert--disabled">Увага, помилка</span>
+
+    </form>
 </div>
-{{!
-Цей код містить лише те, що буде виводитись в
-
-<body>
-	Адже наш layout/default.hbs має вже структуру HTML
-	}}
