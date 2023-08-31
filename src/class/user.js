@@ -4,7 +4,7 @@ class User {
     ADMIN: 2,
     DEVELOPER: 3,
   }
-
+  //
   static #list = []
 
   constructor({ email, password, role }) {
@@ -43,7 +43,7 @@ class User {
     )
   }
 }
-
+//
 module.exports = {
   User,
 }

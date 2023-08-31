@@ -92,7 +92,7 @@ router.get('/recovery', function (req, res) {
 router.post('/recovery', function (req, res) {
   const { email } = req.body
   console.log(email)
-
+  //
   if (!email) {
     return res.status(400).json({
       message: "Помилка. Обов'язкові поля відсутні",
@@ -120,7 +120,7 @@ router.post('/recovery', function (req, res) {
   }
 })
 
-// ================================================================
+// ======================================================================
 
 router.get('/recovery-confirm', function (req, res) {
   res.render('recovery-confirm', {
@@ -134,7 +134,7 @@ router.get('/recovery-confirm', function (req, res) {
   })
 })
 // ================================================================
-
+//
 router.post('/recovery-confirm', function (req, res) {
   const { password, code } = req.body
 

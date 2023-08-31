@@ -36,7 +36,7 @@ class Confirm {
     return obj ? obj.data : null
   }
 }
-
+//
 module.exports = {
   Confirm,
 }
