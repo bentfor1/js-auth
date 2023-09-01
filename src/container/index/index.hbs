@@ -1,13 +1,12 @@
-{{!
-Це код container файлу для index сторінки,
-в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
-}}
+<div class="page page--background">
+	<header>
+		{{>back-button}}
+	</header>
 
-<main>
-	{{>heading title="Index" info=data.test}}
-</main>
+	<form action="" class="page__section">
+		<a href="/signup" class="button" type="button">Signup</a>
+		<a href="/recovery" class="button" type="button">Recovery</a>
 
-{{!
-    Цей код містить лише те, що буде виводитись в <body>
-    Адже наш layout/default.hbs має вже структуру HTML
-}}
+	</form>
+
+</div>

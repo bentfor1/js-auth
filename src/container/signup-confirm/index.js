@@ -1,23 +1,17 @@
+import { Form } from '../../script/form'
 import {
-  Form,
-  REG_EXP_EMAIL,
-  REG_EXP_PASSWORD,
-} from '../../script/form'
-import { saveSession } from '../../script/session'
+  saveSession,
+  getTokenSession,
+  getSession,
+} from '../../script/session'
 
-class RecoveryConfirmForm extends Form {
+class SignupConfirmForm extends Form {
   FIELD_NAME = {
     CODE: 'code',
-    PASSWORD: 'password',
-    PPASSWORD_AGAIN: 'passwordAgain',
   }
   FIELD_ERRPR = {
     IS_EMPTY: 'Введіть значення в поле',
     IS_BIG: 'Дуже довге значення, прибьеріть зайве',
-    PASSWORD:
-      'Пароль повинен складатися не менше ніж 8 символів, включаючи хочаб одну цифру та велику літеру',
-    PPASSWORD_AGAIN:
-      'Ваш другий пароль не збігається з першим',
   }
 
   validate = (name, value) => {
@@ -26,20 +20,6 @@ class RecoveryConfirmForm extends Form {
     }
     if (String(value).length > 30) {
       return this.FIELD_ERRPR.IS_BIG
-    }
-
-    if (name === this.FIELD_NAME.PASSWORD) {
-      if (!REG_EXP_PASSWORD.test(String(value))) {
-        return this.FIELD_ERRPR.PASSWORD
-      }
-    }
-    if (name === this.FIELD_NAME.PPASSWORD_AGAIN) {
-      if (
-        String(value) !==
-        this.value[this.FIELD_NAME.PASSWORD]
-      ) {
-        return this.FIELD_ERRPR.PPASSWORD_AGAIN
-      }
     }
 
     return null
@@ -54,7 +34,7 @@ class RecoveryConfirmForm extends Form {
       this.setAlert('progress', 'Завантаження...')
 
       try {
-        const res = await fetch('/recovery-confirm', {
+        const res = await fetch('/signup-confirm', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -82,8 +62,7 @@ class RecoveryConfirmForm extends Form {
       [this.FIELD_NAME.CODE]: Number(
         this.value[this.FIELD_NAME.CODE],
       ),
-      [this.FIELD_NAME.PASSWORD]:
-        this.value[this.FIELD_NAME.PASSWORD],
+      token: getTokenSession(),
     })
   }
 
@@ -104,4 +83,27 @@ class RecoveryConfirmForm extends Form {
   }
 }
 
-window.recoveryConfirmForm = new RecoveryConfirmForm()
+window.signupConfirmForm = new SignupConfirmForm()
+
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    if (window.session) {
+      if (window.session.user.isConfirm) {
+        location.assign('/')
+      }
+    } else {
+      location.assign('/')
+    }
+  } catch (error) {}
+
+  document
+    .querySelector('#renew')
+    .addEventListener('click', (e) => {
+      e.preventDefault()
+
+      const session = getSession()
+      location.assign(
+        `/signup-confirm?renew=true&email=${session.user.email}`,
+      )
+    })
+})

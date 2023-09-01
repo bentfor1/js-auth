@@ -3,6 +3,7 @@ import {
   REG_EXP_EMAIL,
   REG_EXP_PASSWORD,
 } from '../../script/form'
+import { saveSession } from '../../script/session'
 
 class SignupForm extends Form {
   FIELD_NAME = {
@@ -83,6 +84,8 @@ class SignupForm extends Form {
 
         if (res.ok) {
           this.setAlert('success', data.message)
+          saveSession(data.session)
+          location.assign('/')
         } else {
           this.setAlert('error', data.message)
         }
@@ -121,3 +124,15 @@ class SignupForm extends Form {
 }
 
 window.signupForm = new SignupForm()
+
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    if (window.session) {
+      if (window.session.user.isConfirm) {
+        location.assign('/')
+      }
+    } else {
+      // location.assign('/')
+    }
+  } catch (error) {}
+})
