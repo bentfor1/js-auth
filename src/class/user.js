@@ -48,6 +48,23 @@ class User {
       ) || null
     )
   }
+
+  static getById = (id) => {
+    return (
+      this.#list.find((user) => user.id === Number(id)) ||
+      null
+    )
+  }
+
+  static getlist = () => this.#list
+
+  static confirmByEmail = (email, confirm) => {
+    const user = this.getByEmail(email)
+
+    if (user) {
+      user.isConfirm = confirm
+    }
+  }
 }
 
 module.exports = {

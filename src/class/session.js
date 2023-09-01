@@ -37,19 +37,15 @@ class Session {
   }
 
   static get = (token) => {
-    console.log(this.#list)
-    return (
-      this.#list.find((item) => (item.token = token)) ||
-      null
+    const data = this.#list.find(
+      (item) => item.token === token,
     )
+    console.log('Session list:', this.#list)
+
+    return data || null
   }
 }
 
 module.exports = {
   Session,
 }
-
-console.log(
-  '++++++++++++++++++++++++++++++',
-  Session.generateCode(),
-)

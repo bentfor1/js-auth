@@ -89,6 +89,7 @@ class SignupForm extends Form {
 window.signupForm = new SignupForm()
 
 document.addEventListener('DOMContentLoaded', () => {
+  saveSession(null)
   if (window.session) {
     location.assign('/')
   }

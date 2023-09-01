@@ -8,10 +8,27 @@ const { Confirm } = require('../class/confirm')
 const { Session } = require('../class/session')
 
 User.create({
-  email: 'test@mail.com',
+  email: 'user@mail.com',
   password: 123,
   role: 1,
 })
+
+User.create({
+  email: 'admin@mail.com',
+  password: 123,
+  role: 2,
+})
+User.create({
+  email: 'dev@mail.com',
+  password: 123,
+  role: 3,
+})
+User.create({
+  email: 'user1@mail.com',
+  password: 123,
+  role: 1,
+})
+
 // ================================================================
 
 router.get('/signup', function (req, res) {
@@ -140,6 +157,7 @@ router.get('/recovery-confirm', function (req, res) {
     data: {},
   })
 })
+
 // ================================================================
 
 router.post('/recovery-confirm', function (req, res) {
@@ -185,6 +203,7 @@ router.post('/recovery-confirm', function (req, res) {
     })
   }
 })
+
 // ================================================================
 
 router.get('/signup-confirm', function (req, res) {
@@ -202,7 +221,9 @@ router.get('/signup-confirm', function (req, res) {
     data: {},
   })
 })
+
 // ================================================================
+
 router.post('/signup-confirm', function (req, res) {
   const { code, token } = req.body
 
@@ -236,6 +257,8 @@ router.post('/signup-confirm', function (req, res) {
 
     session.user.isConfirm = true
 
+    User.confirmByEmail(email, true)
+
     return res.status(200).json({
       message: 'Ви підтвердили свою пошту',
       session,
@@ -260,7 +283,9 @@ router.get('/login', function (req, res) {
     data: {},
   })
 })
+
 // ================================================================
+
 router.post('/login', function (req, res) {
   const { email, password } = req.body
 
@@ -297,4 +322,7 @@ router.post('/login', function (req, res) {
     })
   }
 })
+
+// ================================================================
+
 module.exports = router
